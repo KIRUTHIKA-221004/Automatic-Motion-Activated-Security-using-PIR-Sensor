@@ -1,6 +1,6 @@
 # Automatic-Motion-Activated-Security-using-PIR-Sensor
 ## AIM:
-             To detect motion using a PIR sensor connected to an Arduino and trigger an LED (using the built-in LED) when motion is sensed.
+  To detect motion using a PIR sensor connected to an Arduino and trigger an LED (using the built-in LED) when motion is sensed.
              
 ## Hardware / Software Tools required:
 1.	 Arduino Uno R3 – 1 No
@@ -14,10 +14,13 @@
 
 ## Theory:
 
-     Passive Infrared (PIR) sensors are electronic devices that detect motion by sensing infrared radiation emitted by objects. Every object with a temperature above absolute zero emits infrared radiation. The PIR sensor detects this radiation and can sense motion when a warm object, such as a human body, passes within its detection range. The sensor contains a pair of pyroelectric sensors housed under a Fresnel lens, which focuses the infrared signals onto the sensor surface. When the infrared levels change rapidly between the two pyroelectric sensors—such as when a person walks by—the sensor outputs a HIGH signal indicating motion detection.
+  Passive Infrared (PIR) sensors are electronic devices that detect motion by sensing infrared radiation emitted by objects. Every object with a temperature above absolute zero emits infrared radiation. The PIR sensor detects this radiation and can sense motion when a warm object, such as a human body, passes within its detection range. The sensor contains a pair of pyroelectric sensors housed under a Fresnel lens, which focuses the infrared signals onto the sensor surface. When the infrared levels change rapidly between the two pyroelectric sensors—such as when a person walks by—the sensor outputs a HIGH signal indicating motion detection.
 PIR sensors are widely used in motion detection systems, security alarms, automatic lighting systems, and smart surveillance. They are popular due to their low power consumption, affordability, and ease of integration with microcontrollers such as the Arduino Uno. The sensor typically has three pins: VCC (power), GND (ground), and OUT (signal). When idle, the output pin remains LOW. Once motion is detected, the sensor sends a HIGH signal to the microcontroller, which can be used to trigger a response such as turning on an LED or activating an alarm.
 In this experiment, the PIR sensor is connected to an Arduino Uno board. The VCC pin of the sensor is connected to the 5V supply of the Arduino to power the sensor. The GND pin is connected to the Arduino’s ground. The OUT pin is connected to a digital input pin (pin 2 in this case) of the Arduino. The Arduino continuously monitors the state of the signal pin. If the signal pin goes HIGH, it means the sensor has detected motion, and the Arduino is programmed to turn ON the built-in LED on pin 13. If no motion is detected, the signal remains LOW, and the LED is turned OFF.
-Circuit Diagram:
+
+##Circuit Diagram:
+<img width="1060" height="576" alt="image" src="https://github.com/user-attachments/assets/f4270a94-24b1-4346-af85-3c285668c68c" />
+
  
 ## Procedure: //Modify based on your circuit
 
@@ -60,11 +63,42 @@ Step 7: Save Your Work
 
 
 # Code:
-
-
+```
+const int led = 9;
+const int sensor = 8;
+const int buzzer = 10;
+bool sensor_value ;
+bool state = false ;
+void setup()
+{
+pinMode(led,OUTPUT);
+pinMode(buzzer,OUTPUT);
+pinMode(sensor,INPUT);
+}
+void loop()
+{
+ sensor_value = digitalRead(sensor);
+  if(sensor_value == true){
+    state = true;
+  }
+  if(state == true){
+    digitalWrite(led,HIGH);
+    tone(buzzer,1000);
+    delay(500);
+    digitalWrite(led,LOW);
+    noTone(buzzer);
+    delay(500);
+  }
+  else
+    digitalWrite(led,LOW);
+}
+```
 
 # Output:
+<img width="937" height="627" alt="image" src="https://github.com/user-attachments/assets/626503e7-e3f5-477d-a5b1-dde482ff6efc" />
+<img width="982" height="613" alt="image" src="https://github.com/user-attachments/assets/36a9a8ec-b88c-4f0d-9aa9-1c4295b186fc" />
 
+https://github.com/user-attachments/assets/35e06579-3b98-429c-b63a-599581f78aea
 
 
 
